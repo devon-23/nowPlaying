@@ -36,7 +36,7 @@ const app = Vue.createApp({
             this.timestamp = time;
 
             if (this.songCount < (Number(this.songLength) / 1000) ) {
-                this.songCount = this.songCount + 1
+                this.songCount =  this.songCount + 1
                 if (this.countSec < 59) {
                     this.countSec = this.countSec + 1
                 } else {
@@ -48,7 +48,6 @@ const app = Vue.createApp({
                 this.countSec = 0
                 this.countMin = 0
             }
-            console.log(this.songCount)
         },
         async nowPlaying() {
             const res = await fetch(`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${this.username}&api_key=${this.api_key}&format=json&limit=1`)
@@ -80,7 +79,6 @@ const app = Vue.createApp({
                         this.songMin = (Math.floor(Number(this.songLength) / 60000))
                         this.songSec = ((this.songLength - (this.songMin * 60000))/1000)
                     }
-                    console.log(this.songLength)
                 }
             } else {
                 this.songName = "Nothing playing"

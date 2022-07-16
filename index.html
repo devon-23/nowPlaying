@@ -17,8 +17,8 @@
         </div>
         <div class="info">
           <div class="progress-bar">
-            <div class="time--current">{{countMin}}:{{countSec}}</div>
-            <div class="time--total">{{ songMin }}:{{ songSec }}</div>
+            <div class="time--current">{{countMin}}:{{(this.countSec<10?'0':'') + this.countSec}}</div>
+            <div class="time--total">{{ songMin }}:{{ (this.songSec<10?'0':'') + this.songSec }}</div>
             <div class="fill" :style="{width: Math.floor((songCount/(songLength/ 1000))*100) + '%'}"></div>
           </div>
           <div class="currently-playing">
