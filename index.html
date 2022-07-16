@@ -12,22 +12,22 @@
     <div id="app">
       <h1>{{ timestamp }}</h1>
       <div id="player">
-          <div class="album">
-            <img :src="picture">
+        <div class="album">
+          <img :src="picture">
+        </div>
+        <div class="info">
+          <div class="progress-bar">
+            <div class="time--current">{{countMin}}:{{countSec}}</div>
+            <div class="time--total">{{ songMin }}:{{ songSec }}</div>
+            <div class="fill" :style="{width: Math.floor((songCount/(songLength/ 1000))*100) + '%'}"></div>
           </div>
-          <div class="info">
-            <div class="progress-bar">
-              <div class="time--current">0:25</div>
-              <div class="time--total">-3:15</div>
-              <div class="fill"></div>
-            </div>
-            <div class="currently-playing">
-              <h2 class="song-name">{{ songName }}</h2>
-              <h3 class="artist-name">{{ artistName }}</h3>
-            </div>
+          <div class="currently-playing">
+            <h2 class="song-name">{{ songName }}</h2>
+            <h3 class="artist-name">{{ artistName }}</h3>
           </div>
         </div>
       </div>
-      <script src="app.js"></script>
+    </div>
+    <script src="app.js"></script>
   </body>
 </html>

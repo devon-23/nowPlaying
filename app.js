@@ -8,8 +8,14 @@ const app = Vue.createApp({
             username: 'devonbarks',
             gender: '',
             picture: '',
-            length: '',
-            api_key: "092d316884d8385f35ad8b84f5f42ef8",
+            oldPicture: '',
+            songLength: '',
+            countSec: 0,
+            countMin: 0,
+            songCount: 0,
+            songMin: '',
+            songSec: '',
+            api_key: "",
         }
     },
     created() {
@@ -28,22 +34,60 @@ const app = Vue.createApp({
             var seconds = (today.getSeconds()<10?'0':'') + today.getSeconds()
             const time = today.getHours() + ":" + minutes + ":" + seconds;
             this.timestamp = time;
+
+            if (this.songCount < (Number(this.songLength) / 1000) ) {
+                this.songCount = this.songCount + 1
+                if (this.countSec < 59) {
+                    this.countSec = this.countSec + 1
+                } else {
+                    this.countMin = this.countMin + 1
+                    this.countSec = 0
+                }
+            } else {
+                this.songCount = 0
+                this.countSec = 0
+                this.countMin = 0
+            }
+            console.log(this.songCount)
         },
         async nowPlaying() {
             const res = await fetch(`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${this.username}&api_key=${this.api_key}&format=json&limit=1`)
             const results = await res.json()
+            const track1 = results.recenttracks.track[0]
+            if (track1["@attr"] !== undefined) {
+                this.songName = track1.name
+                this.albumName = track1.album.name
+                this.artistName = `by ${track1.artist["#text"]}`
+                this.oldPicture = this.picture
+                this.picture = track1.image[3]["#text"]
 
-            if (results.recenttracks.track[0]["@attr"] !== undefined) {
-                this.songName = results.recenttracks.track[0].name
-                this.albumName = results.recenttracks.track[0].album.name
-                this.artistName = `by ${results.recenttracks.track[0].artist["#text"]}`
-                this.picture = results.recenttracks.track[0].image[3]["#text"]
+                if (this.picture === "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png") {
+                    this.picture = ""
+                }
+
+                if (this.oldPicture !== this.picture) { //new song
+                    this.countSec = 0
+                    this.countMin = 0
+                    this.songCount = 0
+                    const res2 = await fetch(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${this.api_key}&artist=${results.recenttracks.track[0].artist["#text"]}&track=${this.songName}&format=json`)
+                    const results2 = await res2.json()
+                    if (results2.track.duration === '0' || results2.track.duration === undefined) {
+                        this.songLength = '180000'
+                        this.songMin = '3'
+                        this.songSec = '25'
+                    } else {
+                        this.songLength = results2.track.duration
+                        this.songMin = (Math.floor(Number(this.songLength) / 60000))
+                        this.songSec = ((this.songLength - (this.songMin * 60000))/1000)
+                    }
+                    console.log(this.songLength)
+                }
             } else {
                 this.songName = "Nothing playing"
                 this.albumName = ''
                 this.artistName = ''
                 this.picture = ''
-                this.length = '0'
+                this.songLength = '0'
             }
         }
     }
