@@ -92,3 +92,7 @@ const app = Vue.createApp({
 })
 
 app.mount('#app')
+
+function myFunction(x) {
+    x.classList.toggle("change");
+  }
