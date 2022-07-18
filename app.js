@@ -1,4 +1,5 @@
 const app = Vue.createApp({
+    el: '#app',
     data() {
         return {
             songName: '',
@@ -16,6 +17,11 @@ const app = Vue.createApp({
             songMin: '',
             songSec: '',
             api_key: "",
+            color: '',
+            //linear-gradient(to bottom left, #C0CFB2 10%, #8BA989 80%)
+            bgc: {
+                background: 'blue'
+            }
         }
     },
     created() {

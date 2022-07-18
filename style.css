@@ -13,9 +13,15 @@ h1 {
 }
 
 body {
-  background: linear-gradient(to bottom left, #C0CFB2 10%, #8BA989 80%);
+  /* background: #364F3C; */
   display: grid;
   overflow: hidden;
+}
+
+#app {
+  /* background: #364F3C; */
+
+  background: linear-gradient(to bottom left, #C0CFB2 10%, #8BA989 80%);
 }
 
 #player {
@@ -65,7 +71,6 @@ body {
 
 .fill {
   background-color: #8BA989;
-  /* width: 15%; */
   height: 0.3rem;
   border-radius: 2px;
 }
@@ -110,7 +115,6 @@ body {
 }
 
 .toggler{
-  /* ALWAYS KEEPING THE TOGGLER OR THE CHECKBOX ON TOP OF EVERYTHING :  */
     z-index:2;
     height: 50px;
     width: 50px;
@@ -129,14 +133,10 @@ body {
     width: 40px;
     padding: 0.6rem;
   
-  /* FOR DISPLAYING EVERY ELEMENT IN THE CENTER : */
-  
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-/* CREATING THE MIDDLE LINE OF THE HAMBURGER : */
 
 .hamburger > div{
     position: relative;
@@ -147,9 +147,6 @@ body {
     width: 60%;
     transition: all  0.4s ease;
 }
-
-/* CREATING THE TOP AND BOTTOM LINES : 
-TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
 
 .hamburger > div::before,
 .hamburger > div::after{
@@ -166,8 +163,6 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
     top: 10px;
 }
 
-/* IF THE TOGGLER IS IN ITS CHECKED STATE, THEN SETTING THE BACKGROUND OF THE MIDDLE LAYER TO COMPLETE BLACK AND OPAQUE :  */
-
 .toggler:checked + .hamburger > div{
     background: rgba(0,0,0,0);
 }
@@ -178,16 +173,11 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
     background: black;
 }
 
-/* AND ROTATING THE TOP AND BOTTOM LINES :  */
-
 .toggler:checked + .hamburger > div::after{
     top: 0;
     transform: rotate(135deg);
     background: black;
 }
-
-
-/* MAIN MENU WITH THE WHITE BACKGROUND AND THE TEXT :  */
 
 .menu{
     /* background: white; */
@@ -199,14 +189,9 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
     transition: all 0.4s ease;
 }
 
-/* IF THE TOGGLER IS CHECKED, THEN INCREASE THE WIDTH OF THE MENU TO 30% , CREATING A SMOOTH EFFECT :  */
-
 .toggler:checked ~ .menu{
     width: 30%;
 }
-
-
-/* STYLING THE LIST :  */
 
 .menu >  div > ul{
     display: flex;
@@ -214,8 +199,6 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
     position: fixed;
     top: 70px;
     padding-left: 10px;
-  
-  /* HIDDEN INITIALLY  :  */
   
     visibility: hidden;
 }
@@ -231,8 +214,6 @@ TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
     font-size: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* WHEN THE TOGGLER IS CHECKED, CHANGE THE VISIBILITY TO VISIBLE :  */
 
 .toggler:checked ~ .menu > div > ul{
     transition: visibility 0.4s ease;

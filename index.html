@@ -8,42 +8,45 @@
       <link rel="stylesheet" href="style.css">
       <title>Now Playing</title>
   </head>
-  <body>
-    <div id="app">
-      <h1>{{ timestamp }}</h1>
-      <div id="player">
-        <div class="album">
-          <img :src="picture">
-        </div>
-        <div class="info">
-          <div class="progress-bar">
-            <div class="time--current">{{countMin}}:{{(this.countSec<10?'0':'') + this.countSec}}</div>
-            <div class="time--total">{{ songMin }}:{{ (this.songSec<10?'0':'') + this.songSec }}</div>
-            <div class="fill" :style="{width: Math.floor((songCount/(songLength/ 1000))*100) + '%'}"></div>
-          </div>
-          <div class="currently-playing">
-            <h2 class="song-name">{{ songName }}</h2>
-            <h3 class="artist-name">{{ artistName }}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- menu -->
-    <input type="checkbox" class="toggler">
-    <div class="hamburger">
-      <div></div>
-    </div>
-    <div class="menu">
-      <div>
-        <ul>
-          <li><a>background</a><input type="color"></li>
-          <li><a>12 hour</a> <input type="checkbox"></li>
-          <li><a>username</a> <input type="text"></li>
-          <li><a href='#'>Contact</a></li>
-        </ul>
+  <body>
+    <div id="app" :style="{background: color}">
+      <div :style="{background: color}">
+        <h1>{{ timestamp }}</h1>
+        <div id="player">
+          <div class="album">
+            <img :src="picture">
+          </div>
+          <div class="info">
+            <div class="progress-bar">
+              <div class="time--current">{{countMin}}:{{(this.countSec<10?'0':'') + this.countSec}}</div>
+              <div class="time--total">{{ songMin }}:{{ (this.songSec<10?'0':'') + this.songSec }}</div>
+              <div class="fill" :style="{width: Math.floor((songCount/(songLength/ 1000))*100) + '%'}"></div>
+            </div>
+            <div class="currently-playing">
+              <h2 class="song-name">{{ songName }}</h2>
+              <h3 class="artist-name">{{ artistName }}</h3>
+            </div>
+          </div>
+        </div>
+        
+        <!-- menu -->
+        <input type="checkbox" class="toggler">
+        <div class="hamburger">
+          <div></div>
+        </div>
+        <div class="menu">
+          <div>
+            <ul>
+              <li><a>background</a><input type="color" v-model="color"></li>
+              <li><a>12 hour</a> <input type="checkbox"></li>
+              <li><a>username</a> <input type="text" v-model="username"></li>
+            </ul>
+          </div>
+        </div>
+        
       </div>
     </div>
-    <script src="app.js"></script>
   </body>
+  <script src="app.js"></script>
 </html>
