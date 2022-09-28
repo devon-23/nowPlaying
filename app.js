@@ -16,9 +16,9 @@ const app = Vue.createApp({
             songCount: 0,
             songMin: '',
             songSec: '',
+            military: true,
             api_key: "",
             color: '',
-            //linear-gradient(to bottom left, #C0CFB2 10%, #8BA989 80%)
             bgc: {
                 background: 'blue'
             }
@@ -38,7 +38,8 @@ const app = Vue.createApp({
             const today = new Date();
             var minutes = (today.getMinutes()<10?'0':'') + today.getMinutes()
             var seconds = (today.getSeconds()<10?'0':'') + today.getSeconds()
-            const time = today.getHours() + ":" + minutes + ":" + seconds;
+            var hours = this.military ? today.getHours() : ((today.getHours() > 12) ? today.getHours()-12 : today.getHours())
+            const time = hours + ":" + minutes + ":" + seconds;
             this.timestamp = time;
 
             if (this.songCount < (Number(this.songLength) / 1000) ) {
@@ -101,4 +102,4 @@ app.mount('#app')
 
 function myFunction(x) {
     x.classList.toggle("change");
-  }
+}
